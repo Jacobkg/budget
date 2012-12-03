@@ -43,21 +43,22 @@
   <%= f.text_field :description%>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
-  <%= f.select :category, options_for_select(LineItem::CATEGORIES.map {|n| [n,n]}) %>
+  <%= f.select :category, options_for_select(Category.list.map {|n| [n,n]}) %>
   <%= hidden_field_tag :account, (params[:account] || "Credit Card") %>
   <%= f.submit "Save" %>
 <% end %>
 <br>
+
 <h2>Stats</h2>
 <table id='category-stats'>
   <tr>
     <th>Category</th>
     <th>Spent</th>
   </tr>
-  <% LineItem::CATEGORIES.each do |category| %>
+  <% Category.all.each do |category| %>
     <tr>
-      <td> <%= category %> </td>
-      <td> <%= LineItem.add_up(LineItem.this_month.where(:category => category)).format %> </td>
+      <td> <%= category.name %> </td>
+      <td> <%= category.this_month_total.format %> </td>
     </tr>
   <% end %>
 </table>

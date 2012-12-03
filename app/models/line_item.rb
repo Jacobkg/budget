@@ -1,8 +1,6 @@
 class LineItem < ActiveRecord::Base
   attr_accessible
 
-  CATEGORIES = ["Food", "Rent", "Phone", "Gas", "Big Purchases", "Medical", "Necessities", "Entertainment"]
-
   default_scope order("date ASC")
 
   scope :credit_card, where(:account => "Credit Card")
