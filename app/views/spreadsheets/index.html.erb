@@ -5,17 +5,26 @@
 </div>
 <br>
 
-<div id='line-items'>
+<table id='line-items'>
+  <tr>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Category</th>
+  </tr>
   <% @line_items.each do |line_item| %>
-    <%= line_item.description %> <%= line_item.amount.format %> <%= line_item.category %><br>
+    <tr>
+      <td><%= line_item.description %></td>
+      <td><%= line_item.amount.format %></td>
+      <td><%= line_item.category %></td>
+    </tr>
   <% end %>
-</div>
+</table>
 <br>
 <%= form_for(LineItem.new) do |f| %>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.label :description %>
   <%= f.text_field :description %>
-  <%= f.select :category, options_for_select([["Food", "Food"], ["Phone", "Phone"]]) %>
+  <%= f.select :category, options_for_select(LineItem::CATEGORIES.map {|n| [n,n]}) %>
   <%= f.submit "Save" %>
 <% end %>

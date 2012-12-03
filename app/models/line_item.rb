@@ -1,8 +1,14 @@
 class LineItem < ActiveRecord::Base
   attr_accessible
 
+  CATEGORIES = ["Food", "Rent", "Phone", "Medical"]
+
   def amount
     Money.new(amount_in_cents)
+  end
+
+  def self.this_month
+    LineItem.where(["date >= ?", Date.today.beginning_of_month]).order("date asc")
   end
 
   def self.add_to_spreadsheet(date, description, amount, category)
@@ -13,9 +19,5 @@ class LineItem < ActiveRecord::Base
     line_item.category = category
     line_item.save!
     line_item
-  end
-
-  def self.this_month
-    LineItem.where(["date >= ?", Date.today.beginning_of_month]).order("date asc")
   end
 end
