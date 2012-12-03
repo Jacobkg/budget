@@ -55,4 +55,16 @@ feature "Adding Expenses" do
       page.should have_content "Phone"
     end
   end
+
+  scenario "Setting the date manually for expenses" do
+    visit "/"
+
+    date = Date.today.beginning_of_month + 5.days
+    fill_in "Date", :with => date.strftime("%m/%-d")
+    fill_in "Description", :with => "Stuff"
+    fill_in "Amount", :with => "$123"
+    click_button "Save"
+
+    page.find("#line-items").should have_content date.strftime("%m/%-d")
+  end
 end

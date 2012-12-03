@@ -10,6 +10,7 @@
 
 <table id='line-items'>
   <tr>
+    <th>Date</th>
     <th>Description</th>
     <th>Amount</th>
     <th>Category</th>
@@ -17,6 +18,7 @@
   </tr>
   <% LineItem.this_month.each do |line_item| %>
     <tr>
+      <td><%= short_date(line_item.date) %></td>
       <td><%= line_item.description %></td>
       <td><%= line_item.amount.format %></td>
       <td><%= line_item.category %></td>
@@ -34,12 +36,14 @@
   <%= link_to "Checking Expense", root_url(:account => "Checking") %>
 <% end %>
 
-<%= form_for(@line_item) do |f| %>
+<%= form_for(LineItem.new) do |f| %>
+  <%= label_tag :date_string, "Date" %>
+  <%= text_field_tag :date_string, short_date(Date.today), :autofocus => true %>
   <%= f.label :description %>
-  <%= f.text_field :description, :autofocus => true %>
+  <%= f.text_field :description%>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.select :category, options_for_select(LineItem::CATEGORIES.map {|n| [n,n]}) %>
-  <%= f.hidden_field :account %>
+  <%= hidden_field_tag :account, (params[:account] || "Credit Card") %>
   <%= f.submit "Save" %>
 <% end %>
