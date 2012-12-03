@@ -1,10 +1,10 @@
 <h1><%= current_month %></h1>
 
 <div id='credit-card-balance'>
-  <%= Account.balance("Credit Card").format %>
+  Credit Card Balance: <%= Account.balance("Credit Card").format %>
 </div>
 <div id='checking-balance'>
-  <%= Account.balance("Checking").format %>
+  Checking Balance: <%= Account.balance("Checking").format %>
 </div>
 <br>
 
