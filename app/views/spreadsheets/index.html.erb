@@ -1,7 +1,10 @@
 <h1><%= current_month %></h1>
 
 <div id='credit-card-balance'>
-  <%= @balance.format %>
+  <%= Account.balance("Credit Card").format %>
+</div>
+<div id='checking-balance'>
+  <%= Account.balance("Checking").format %>
 </div>
 <br>
 
@@ -10,21 +13,33 @@
     <th>Description</th>
     <th>Amount</th>
     <th>Category</th>
+    <th>Account</th>
   </tr>
-  <% @line_items.each do |line_item| %>
+  <% LineItem.this_month.each do |line_item| %>
     <tr>
       <td><%= line_item.description %></td>
       <td><%= line_item.amount.format %></td>
       <td><%= line_item.category %></td>
+      <td><%= line_item.account %></td>
     </tr>
   <% end %>
 </table>
 <br>
-<%= form_for(LineItem.new) do |f| %>
+
+<% if params[:account] == "Checking" %>
+  <%= link_to "Credit Card Expense", root_url %>
+  Checking Expense
+<% else %>
+  Credit Card Expense
+  <%= link_to "Checking Expense", root_url(:account => "Checking") %>
+<% end %>
+
+<%= form_for(@line_item) do |f| %>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.label :description %>
   <%= f.text_field :description %>
   <%= f.select :category, options_for_select(LineItem::CATEGORIES.map {|n| [n,n]}) %>
+  <%= f.hidden_field :account %>
   <%= f.submit "Save" %>
 <% end %>

@@ -4,9 +4,9 @@ feature "Spreadsheet Display" do
 
   scenario "Shows the line items for the current month in order" do
     #Given some line items from this month and last month
-    LineItem.add_to_spreadsheet(Date.today.beginning_of_month + 15.days, "Bagels", Money.new(125), "Food")
-    LineItem.add_to_spreadsheet(Date.today.beginning_of_month, "Coffee", Money.new(99), "Food" )
-    LineItem.add_to_spreadsheet(Date.today.beginning_of_month - 1.day, "Last month's rent", Money.new(100000), "Rent")
+    LineItem.add_to_spreadsheet(Date.today.beginning_of_month + 15.days, "Bagels", "Food", Money.new(125), "Credit Card")
+    LineItem.add_to_spreadsheet(Date.today.beginning_of_month, "ITunes", "Entertainment", Money.new(99), "Checking" )
+    LineItem.add_to_spreadsheet(Date.today.beginning_of_month - 1.day, "Last month's rent", "Rent", Money.new(100000), "Credit Card")
 
     #When I visit the home page
     visit "/"
@@ -16,13 +16,31 @@ feature "Spreadsheet Display" do
 
     page.should have_content "Bagels"
     page.should have_content "$1.25"
+    page.should have_content "Food"
+    page.should have_content "Credit Card"
 
-    page.should have_content "Coffee"
+    page.should have_content "ITunes"
     page.should have_content "$0.99"
+    page.should have_content "Entertainment"
+    page.should have_content "Checking"
 
     page.should_not have_content "Last month's rent"
 
     #And they should be in chronological order
-    page.body.should match /.*Coffee.*Bagels.*/m
+    page.body.should match /.*ITunes.*Bagels.*/m
+  end
+
+  scenario "Switch from Credit Card to Checking Mode" do
+    visit "/"
+    page.should have_link "Checking Expense"
+    page.should_not have_link "Credit Card Expense"
+
+    click_link "Checking Expense"
+    page.should_not have_link "Checking Expense"
+    page.should have_link "Credit Card Expense"
+
+    click_link "Credit Card Expense"
+    page.should have_link "Checking Expense"
+    page.should_not have_link "Credit Card Expense"
   end
 end

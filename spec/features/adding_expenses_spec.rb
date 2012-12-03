@@ -14,7 +14,24 @@ feature "Adding Expenses" do
 
     #Then the expense should appear and my credit card balance should be ($25)
     page.should have_content "Shopping at the mall"
+    page.find("#line-items").should have_content "Credit Card"
     page.find("#credit-card-balance").should have_content "$-25.00"
+  end
+
+  scenario "Add an expense to checking account" do
+    #Given a checking account balance of $1000
+    visit "/"
+    page.find("#checking-balance").should have_content "$1,000.00"
+
+    #When I add an expense against my checking account of $150
+    click_link "Checking Expense"
+    fill_in "Description", :with => "Costco"
+    fill_in "Amount", :with => "$150.00"
+    click_button "Save"
+
+    #Then the expenses should appear and my checking account should be $850.00
+    page.find("#line-items").should have_content "Checking"
+    page.find("#checking-balance").should have_content "$850.00"
   end
 
   scenario "Adding different types of expenses" do

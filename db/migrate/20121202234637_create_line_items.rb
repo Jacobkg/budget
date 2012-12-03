@@ -5,6 +5,7 @@ class CreateLineItems < ActiveRecord::Migration
       t.integer :amount_in_cents
       t.date :date
       t.string :category
+      t.string :account
 
       t.timestamps
     end
