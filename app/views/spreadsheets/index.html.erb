@@ -28,15 +28,8 @@
 </table>
 <br>
 
-<% if params[:account] == "Checking" %>
-  <%= link_to "Credit Card Expense", root_url %>
-  Checking Expense
-<% else %>
-  Credit Card Expense
-  <%= link_to "Checking Expense", root_url(:account => "Checking") %>
-<% end %>
-
 <%= form_for(LineItem.new) do |f| %>
+  <%= f.select :account, options_for_select([["Credit Card", "Credit Card"], ["Checking", "Checking"]]) %>
   <%= label_tag :date_string, "Date" %>
   <%= text_field_tag :date_string, short_date(Date.today), :autofocus => true %>
   <%= f.label :description %>

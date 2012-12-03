@@ -29,18 +29,4 @@ feature "Spreadsheet Display" do
     #And they should be in chronological order
     page.body.should match /.*ITunes.*Bagels.*/m
   end
-
-  scenario "Switch from Credit Card to Checking Mode" do
-    visit "/"
-    page.should have_link "Checking Expense"
-    page.should_not have_link "Credit Card Expense"
-
-    click_link "Checking Expense"
-    page.should_not have_link "Checking Expense"
-    page.should have_link "Credit Card Expense"
-
-    click_link "Credit Card Expense"
-    page.should have_link "Checking Expense"
-    page.should_not have_link "Credit Card Expense"
-  end
 end

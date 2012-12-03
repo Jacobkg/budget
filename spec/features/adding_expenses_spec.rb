@@ -24,7 +24,7 @@ feature "Adding Expenses" do
     page.find("#checking-balance").should have_content "$1,000.00"
 
     #When I add an expense against my checking account of $150
-    click_link "Checking Expense"
+    select "Checking"
     fill_in "Description", :with => "Costco"
     fill_in "Amount", :with => "$150.00"
     click_button "Save"
