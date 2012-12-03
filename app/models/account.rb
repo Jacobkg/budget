@@ -9,9 +9,13 @@ class Account < ActiveRecord::Base
     Money.new(balance_in_cents)
   end
 
-  def deduct(amount)
-    self.balance_in_cents -= amount.cents
+  def set_balance(new_balance)
+    self.balance_in_cents = new_balance.cents
     save!
+  end
+
+  def deduct(amount)
+    set_balance(balance - amount)
   end
 
 end

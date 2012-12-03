@@ -5,6 +5,7 @@ Budget::Application.routes.draw do
   root :to => 'spreadsheets#index'
 
   resources :line_items
+  resources :accounts
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

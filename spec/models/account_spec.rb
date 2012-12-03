@@ -15,4 +15,9 @@ describe Account do
     Account.by_name("Checking").balance.should == Money.new(90000)
   end
 
+  it "can set the balance" do
+    Account.by_name("Credit Card").set_balance(Money.new(-150))
+    Account.by_name("Credit Card").balance.should == Money.new(-150)
+  end
+
 end
