@@ -1,7 +1,7 @@
 class LineItem < ActiveRecord::Base
   attr_accessible
 
-  CATEGORIES = ["Food", "Rent", "Phone", "Gas", "Big Purchases", "Medical", "Entertainment"]
+  CATEGORIES = ["Food", "Rent", "Phone", "Gas", "Big Purchases", "Medical", "Necessities", "Entertainment"]
 
   def amount
     Money.new(amount_in_cents)
