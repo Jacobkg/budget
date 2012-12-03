@@ -16,4 +16,26 @@ feature "Adding Expenses" do
     page.should have_content "Shopping at the mall"
     page.find("#credit-card-balance").should have_content "$-25.00"
   end
+
+  scenario "Adding different types of expenses" do
+    #Given no line items
+
+    #When I add a Food and a Phone expense
+    visit "/"
+    fill_in "Description", :with => "Lunch"
+    fill_in "Amount", :with => "$10.00"
+    select "Food"
+    click_button "Save"
+
+    fill_in "Description", :with => "ATT Wireless"
+    fill_in "Amount", :with => "$165.00"
+    select "Phone"
+    click_button "Save"
+
+    #Then they should be categorized accordingly
+    within("#line-items") do
+      page.should have_content "Food"
+      page.should have_content "Phone"
+    end
+  end
 end

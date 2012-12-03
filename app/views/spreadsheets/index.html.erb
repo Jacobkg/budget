@@ -4,14 +4,18 @@
   <%= @balance.format %>
 </div>
 <br>
-<% @line_items.each do |line_item| %>
-  <%= line_item.description %> <%= line_item.amount.format %><br>
-<% end %>
+
+<div id='line-items'>
+  <% @line_items.each do |line_item| %>
+    <%= line_item.description %> <%= line_item.amount.format %> <%= line_item.category %><br>
+  <% end %>
+</div>
 <br>
 <%= form_for(LineItem.new) do |f| %>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.label :description %>
   <%= f.text_field :description %>
+  <%= f.select :category, options_for_select([["Food", "Food"], ["Phone", "Phone"]]) %>
   <%= f.submit "Save" %>
 <% end %>

@@ -4,6 +4,7 @@ class CreateLineItems < ActiveRecord::Migration
       t.string :description
       t.integer :amount_in_cents
       t.date :date
+      t.string :category
 
       t.timestamps
     end

@@ -1,6 +1,7 @@
 class LineItemsController < ApplicationController
   def create
-    LineItem.add_to_spreadsheet(params[:line_item][:description], Money.parse(params[:line_item][:amount]), Date.today)
+    attributes = params[:line_item]
+    LineItem.add_to_spreadsheet(Date.today, attributes[:description], Money.parse(attributes[:amount]), attributes[:category] )
     redirect_to root_url
   end
 end

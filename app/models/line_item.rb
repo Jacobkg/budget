@@ -1,12 +1,18 @@
 class LineItem < ActiveRecord::Base
-  attr_accessible :amount_in_cents, :description, :date
+  attr_accessible
 
   def amount
     Money.new(amount_in_cents)
   end
 
-  def self.add_to_spreadsheet(description, amount, date)
-    LineItem.create! :description => description, :amount_in_cents => amount.cents, :date => date
+  def self.add_to_spreadsheet(date, description, amount, category)
+    line_item = LineItem.new
+    line_item.description = description
+    line_item.amount_in_cents = amount.cents
+    line_item.date = date
+    line_item.category = category
+    line_item.save!
+    line_item
   end
 
   def self.this_month
