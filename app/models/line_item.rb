@@ -3,20 +3,14 @@ class LineItem < ActiveRecord::Base
 
   CATEGORIES = ["Food", "Rent", "Phone", "Gas", "Big Purchases", "Medical", "Necessities", "Entertainment"]
 
+  default_scope order("date ASC")
+
+  scope :credit_card, where(:account => "Credit Card")
+  scope :checking, where(:account => "Checking")
+  scope :this_month, where(["date >= ?", Date.today.beginning_of_month])
+
   def amount
     Money.new(amount_in_cents)
-  end
-
-  def self.this_month
-    LineItem.where(["date >= ?", Date.today.beginning_of_month]).order("date asc")
-  end
-
-  def self.credit_card
-    LineItem.where(:account => "Credit Card")
-  end
-
-  def self.checking
-    LineItem.where(:account => "Checking")
   end
 
   def self.add_to_spreadsheet(date, description, category, amount, account)

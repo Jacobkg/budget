@@ -6,7 +6,7 @@ class Account
     elsif account_type == "Checking"
       Money.new(100000) - LineItem.checking.inject(Money.new(0)) {|sum, x| sum + x.amount}
     else
-      raise "Unknow Account Type"
+      raise "Unknown Account Type"
     end
   end
 
