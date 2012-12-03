@@ -1,8 +1,29 @@
 class LineItemsController < ApplicationController
   def create
-    attributes = params[:line_item]
-    LineItem.add_to_spreadsheet(Date.parse(params[:date_string]), attributes[:description], attributes[:category], Money.parse(attributes[:amount]), attributes[:account] )
-    Account.by_name(attributes[:account]).deduct(Money.parse(attributes[:amount]))
+    LineItem.add_to_spreadsheet(date, description, category, amount, account_name)
+    Account.by_name(account_name).deduct(amount)
     redirect_to root_url
   end
+
+  private
+
+    def date
+      Date.parse(params[:line_item][:date_string])
+    end
+
+    def description
+      params[:line_item][:description]
+    end
+
+    def category
+      params[:line_item][:category]
+    end
+
+    def amount
+      Money.parse(params[:line_item][:amount])
+    end
+
+    def account_name
+      params[:line_item][:account]
+    end
 end
