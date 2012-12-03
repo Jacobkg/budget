@@ -35,10 +35,10 @@
 <% end %>
 
 <%= form_for(@line_item) do |f| %>
+  <%= f.label :description %>
+  <%= f.text_field :description, :autofocus => true %>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
   <%= f.select :category, options_for_select(LineItem::CATEGORIES.map {|n| [n,n]}) %>
   <%= f.hidden_field :account %>
   <%= f.submit "Save" %>
