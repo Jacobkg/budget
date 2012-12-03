@@ -23,4 +23,9 @@ class LineItem < ActiveRecord::Base
     line_item.save!
     line_item
   end
+
+  def self.add_up(line_item_association)
+    line_item_association.inject(Money.new(0)) {|sum, x| sum + x.amount}
+  end
+
 end

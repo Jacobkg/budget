@@ -57,7 +57,7 @@
   <% LineItem::CATEGORIES.each do |category| %>
     <tr>
       <td> <%= category %> </td>
-      <td> <%= Money.parse(LineItem.this_month.where(:category => category).sum {|n| n.amount }).format %> </td>
+      <td> <%= LineItem.add_up(LineItem.this_month.where(:category => category)).format %> </td>
     </tr>
   <% end %>
 </table>
