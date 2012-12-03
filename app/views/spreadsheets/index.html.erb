@@ -1,0 +1,17 @@
+<h1><%= current_month %></h1>
+
+<div id='credit-card-balance'>
+  <%= @balance.format %>
+</div>
+<br>
+<% @line_items.each do |line_item| %>
+  <%= line_item.description %> <%= line_item.amount.format %><br>
+<% end %>
+<br>
+<%= form_for(LineItem.new) do |f| %>
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.submit "Save" %>
+<% end %>
