@@ -17,13 +17,6 @@ describe LineItem do
     LineItem.this_month.should == [ current ]
   end
 
-  it "can filter line items by account type" do
-    credit_card = LineItem.add_to_spreadsheet(Date.today, "One", "Food", Money.new(1), "Credit Card")
-    checking = LineItem.add_to_spreadsheet(Date.today - 1.month, "Two", "Food", Money.new(1), "Checking")
-    LineItem.credit_card.should == [ credit_card ]
-    LineItem.checking.should == [ checking ]
-  end
-
   it "orders line items chronologically from oldest to newest" do
     first = LineItem.add_to_spreadsheet(Date.today.beginning_of_month, "One", "Food", Money.new(1), "Credit Card")
     last = LineItem.add_to_spreadsheet(Date.today.beginning_of_month + 2.days, "Two", "Food", Money.new(1), "Credit Card")

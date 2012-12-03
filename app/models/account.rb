@@ -1,13 +1,17 @@
-class Account
+class Account < ActiveRecord::Base
+  attr_accessible
 
-  def self.balance(account_type)
-    if account_type == "Credit Card"
-      Money.new(0) - LineItem.sum_up(LineItem.credit_card)
-    elsif account_type == "Checking"
-      Money.new(100000) - LineItem.sum_up(LineItem.checking)
-    else
-      raise "Unknown Account Type"
-    end
+  def self.by_name(account_name)
+    Account.find_by_name!(account_name)
+  end
+
+  def balance
+    Money.new(balance_in_cents)
+  end
+
+  def deduct(amount)
+    self.balance_in_cents -= amount.cents
+    save!
   end
 
 end

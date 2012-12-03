@@ -3,8 +3,6 @@ class LineItem < ActiveRecord::Base
 
   default_scope order("date ASC")
 
-  scope :credit_card, where(:account => "Credit Card")
-  scope :checking, where(:account => "Checking")
   scope :this_month, where(["date >= ?", Date.today.beginning_of_month])
 
   def amount

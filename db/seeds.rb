@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+credit_card = Account.new
+credit_card.name = "Credit Card"
+credit_card.save!
+
+checking = Account.new
+checking.name = "Checking"
+checking.balance_in_cents = 100000
+checking.save!

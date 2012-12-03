@@ -6,4 +6,8 @@ module ApplicationHelper
   def short_date(date)
     date.strftime("%m/%-d")
   end
+
+  def to_html_id(string)
+    string.gsub(" ", "-").downcase
+  end
 end

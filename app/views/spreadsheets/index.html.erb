@@ -1,11 +1,10 @@
 <h1><%= current_month %></h1>
 
-<div id='credit-card-balance'>
-  Credit Card Balance: <%= Account.balance("Credit Card").format %>
+<% Account.all.each do |account| %>
+<div id='<%= to_html_id(account.name) %>-balance'>
+  <%= account.name %> Balance: <%= account.balance.format %>
 </div>
-<div id='checking-balance'>
-  Checking Balance: <%= Account.balance("Checking").format %>
-</div>
+<% end %>
 <br>
 
 <table id='line-items'>
@@ -29,7 +28,7 @@
 <br>
 
 <%= form_for(LineItem.new) do |f| %>
-  <%= f.select :account, options_for_select([["Credit Card", "Credit Card"], ["Checking", "Checking"]]) %>
+  <%= f.select :account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
   <%= label_tag :date_string, "Date" %>
   <%= text_field_tag :date_string, short_date(Date.today), :autofocus => true %>
   <%= f.label :description %>
@@ -37,7 +36,6 @@
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.select :category, options_for_select(Category.list.map {|n| [n,n]}) %>
-  <%= hidden_field_tag :account, (params[:account] || "Credit Card") %>
   <%= f.submit "Save" %>
 <% end %>
 <br>
