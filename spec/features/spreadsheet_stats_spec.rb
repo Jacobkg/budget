@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Spreadsheet Display" do
+feature "Spreadsheet Stats" do
 
   scenario "Show totals for each category" do
     Expense.add_to_spreadsheet(Date.today, "One", "Food", Money.new(125), "Credit Card")

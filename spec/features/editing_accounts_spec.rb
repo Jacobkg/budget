@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Credit Card Operations" do
+feature "Editing Accounts" do
 
   scenario "edit credit card balance" do
     #Given a credit card balance of $0
