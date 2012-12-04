@@ -6,7 +6,7 @@ class Category
   end
 
   def this_month_total
-    LineItem.sum_up(LineItem.this_month.where(:category => name))
+    Expense.sum_up(Expense.this_month.where(:category => name))
   end
 
   def self.list

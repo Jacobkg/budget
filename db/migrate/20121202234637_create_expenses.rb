@@ -1,6 +1,6 @@
-class CreateLineItems < ActiveRecord::Migration
+class CreateExpenses < ActiveRecord::Migration
   def change
-    create_table :line_items do |t|
+    create_table :expenses do |t|
       t.string :description
       t.integer :amount_in_cents
       t.date :date

@@ -7,7 +7,7 @@
 <% end %>
 <br>
 
-<table id='line-items'>
+<table id='expenses'>
   <tr>
     <th>Date</th>
     <th>Description</th>
@@ -15,13 +15,13 @@
     <th>Category</th>
     <th>Account</th>
   </tr>
-  <% LineItem.this_month.each do |line_item| %>
+  <% Expense.this_month.each do |expense| %>
     <tr>
-      <td><%= short_date(line_item.date) %></td>
-      <td><%= line_item.description %></td>
-      <td><%= line_item.amount.format %></td>
-      <td><%= line_item.category %></td>
-      <td><%= line_item.account %></td>
+      <td><%= short_date(expense.date) %></td>
+      <td><%= expense.description %></td>
+      <td><%= expense.amount.format %></td>
+      <td><%= expense.category %></td>
+      <td><%= expense.account %></td>
     </tr>
   <% end %>
 </table>

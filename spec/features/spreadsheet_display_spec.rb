@@ -4,9 +4,9 @@ feature "Spreadsheet Display" do
 
   scenario "Shows the line items for the current month in order" do
     #Given some line items from this month and last month
-    LineItem.add_to_spreadsheet(Date.today.beginning_of_month + 15.days, "Bagels", "Food", Money.new(125), "Credit Card")
-    LineItem.add_to_spreadsheet(Date.today.beginning_of_month, "ITunes", "Entertainment", Money.new(99), "Checking" )
-    LineItem.add_to_spreadsheet(Date.today.beginning_of_month - 1.day, "Last month's rent", "Rent", Money.new(100000), "Credit Card")
+    Expense.add_to_spreadsheet(Date.today.beginning_of_month + 15.days, "Bagels", "Food", Money.new(125), "Credit Card")
+    Expense.add_to_spreadsheet(Date.today.beginning_of_month, "ITunes", "Entertainment", Money.new(99), "Checking" )
+    Expense.add_to_spreadsheet(Date.today.beginning_of_month - 1.day, "Last month's rent", "Rent", Money.new(100000), "Credit Card")
 
     #When I visit the home page
     visit "/"

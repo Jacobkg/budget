@@ -1,10 +1,10 @@
 Budget::Application.routes.draw do
 
-  get "line_items/create"
+  get "expenses/create"
 
   root :to => 'spreadsheets#index'
 
-  resources :line_items
+  resources :expenses
   resources :accounts
 
   # The priority is based upon order of creation:
