@@ -10,9 +10,14 @@ describe Account do
     Account.by_name("Checking").balance.should == Money.new(100000)
   end
 
-  it "can deduct from accounts" do
-    Account.by_name("Checking").deduct(Money.new(10000))
+  it "can subtract from accounts" do
+    Account.by_name("Checking").subtract(Money.new(10000))
     Account.by_name("Checking").balance.should == Money.new(90000)
+  end
+
+  it "can add to accounts" do
+    Account.by_name("Checking").add(Money.new(10000))
+    Account.by_name("Checking").balance.should == Money.new(110000)
   end
 
   it "can set the balance" do

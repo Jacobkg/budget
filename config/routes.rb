@@ -5,6 +5,7 @@ Budget::Application.routes.draw do
   root :to => 'spreadsheets#index'
 
   resources :expenses
+  resources :incomes
   resources :accounts
 
   # The priority is based upon order of creation:

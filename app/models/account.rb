@@ -14,8 +14,12 @@ class Account < ActiveRecord::Base
     save!
   end
 
-  def deduct(amount)
+  def subtract(amount)
     set_balance(balance - amount)
+  end
+
+  def add(amount)
+    set_balance(balance + amount)
   end
 
 end
