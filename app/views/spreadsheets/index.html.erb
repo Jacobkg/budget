@@ -1,55 +1,6 @@
-<h1><%= current_month %></h1>
+<%= render "layouts/spreadsheet" %>
 
-<% Account.all.each do |account| %>
-<div id='<%= to_html_id(account.name) %>-balance'>
-  <%= account.name %> Balance: <%= account.balance.format %>
-</div>
-<% end %>
+<%= link_to "Add Expenses", new_line_item_path %>
 <br>
 
-<table id='line-items'>
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Category</th>
-    <th>Account</th>
-  </tr>
-  <% LineItem.this_month.each do |line_item| %>
-    <tr>
-      <td><%= short_date(line_item.date) %></td>
-      <td><%= line_item.description %></td>
-      <td><%= line_item.amount.format %></td>
-      <td><%= line_item.category %></td>
-      <td><%= line_item.account %></td>
-    </tr>
-  <% end %>
-</table>
-<br>
-
-<%= form_for(LineItem.new) do |f| %>
-  <%= f.select :account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
-  <%= label_tag 'line_item[date_string]', "Date" %>
-  <%= text_field_tag 'line_item[date_string]', short_date(Date.today), :autofocus => true %>
-  <%= f.label :description %>
-  <%= f.text_field :description%>
-  <%= f.label :amount %>
-  <%= f.text_field :amount %>
-  <%= f.select :category, options_for_select(Category.list.map {|n| [n,n]}) %>
-  <%= f.submit "Save" %>
-<% end %>
-<br>
-
-<h2>Stats</h2>
-<table id='category-stats'>
-  <tr>
-    <th>Category</th>
-    <th>Spent</th>
-  </tr>
-  <% Category.all.each do |category| %>
-    <tr>
-      <td> <%= category.name %> </td>
-      <td> <%= category.this_month_total.format %> </td>
-    </tr>
-  <% end %>
-</table>
+<%= render "layouts/category_stats" %>

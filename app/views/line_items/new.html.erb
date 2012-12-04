@@ -1,0 +1,16 @@
+<%= render "layouts/spreadsheet" %>
+
+<%= form_for(LineItem.new) do |f| %>
+  <%= f.select :account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
+  <%= label_tag 'line_item[date_string]', "Date" %>
+  <%= text_field_tag 'line_item[date_string]', short_date(Date.today), :autofocus => true %>
+  <%= f.label :description %>
+  <%= f.text_field :description%>
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+  <%= f.select :category, options_for_select(Category.list.map {|n| [n,n]}) %>
+  <%= f.submit "Save" %>
+<% end %>
+<br>
+
+<%= render "layouts/category_stats" %>

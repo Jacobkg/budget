@@ -1,8 +1,12 @@
 class LineItemsController < ApplicationController
+
+  def new
+  end
+
   def create
     LineItem.add_to_spreadsheet(date, description, category, amount, account_name)
     Account.by_name(account_name).deduct(amount)
-    redirect_to root_url
+    redirect_to new_line_item_url
   end
 
   private

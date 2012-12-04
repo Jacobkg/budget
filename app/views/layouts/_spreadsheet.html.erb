@@ -1,0 +1,28 @@
+<h1><%= current_month %></h1>
+
+<% Account.all.each do |account| %>
+<div id='<%= to_html_id(account.name) %>-balance'>
+  <%= account.name %> Balance: <%= account.balance.format %>
+</div>
+<% end %>
+<br>
+
+<table id='line-items'>
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Category</th>
+    <th>Account</th>
+  </tr>
+  <% LineItem.this_month.each do |line_item| %>
+    <tr>
+      <td><%= short_date(line_item.date) %></td>
+      <td><%= line_item.description %></td>
+      <td><%= line_item.amount.format %></td>
+      <td><%= line_item.category %></td>
+      <td><%= line_item.account %></td>
+    </tr>
+  <% end %>
+</table>
+<br>

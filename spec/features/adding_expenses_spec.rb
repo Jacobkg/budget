@@ -2,12 +2,16 @@ require "spec_helper"
 
 feature "Adding Expenses" do
 
+  background do
+    visit "/"
+  end
+
   scenario "Adding an expense to credit card updates the balance" do
     #Given a credit card balance of ($0)
-    visit "/"
     page.find("#credit-card-balance").should have_content "$0.00"
 
     #When I add an expense against my credit card of $25
+    click_link "Add Expenses"
     fill_in "Description", :with => "Shopping at the mall"
     fill_in "Amount", :with => "$25.00"
     click_button "Save"
@@ -20,10 +24,10 @@ feature "Adding Expenses" do
 
   scenario "Add an expense to checking account" do
     #Given a checking account balance of $1000
-    visit "/"
     page.find("#checking-balance").should have_content "$1,000.00"
 
     #When I add an expense against my checking account of $150
+    click_link "Add Expenses"
     select "Checking"
     fill_in "Description", :with => "Costco"
     fill_in "Amount", :with => "$150.00"
@@ -38,7 +42,7 @@ feature "Adding Expenses" do
     #Given no line items
 
     #When I add a Food and a Phone expense
-    visit "/"
+    click_link "Add Expenses"
     fill_in "Description", :with => "Lunch"
     fill_in "Amount", :with => "$10.00"
     select "Food"
@@ -57,8 +61,7 @@ feature "Adding Expenses" do
   end
 
   scenario "Setting the date manually for expenses" do
-    visit "/"
-
+    click_link "Add Expenses"
     date = Date.today.beginning_of_month + 5.days
     fill_in "Date", :with => date.strftime("%m/%-d")
     fill_in "Description", :with => "Stuff"
