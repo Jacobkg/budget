@@ -3,6 +3,7 @@ class CreateIncomes < ActiveRecord::Migration
     create_table :incomes do |t|
       t.string :description
       t.integer :amount_in_cents
+      t.date :date
 
       t.timestamps
     end

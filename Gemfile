@@ -10,6 +10,7 @@ gem 'money'
 
 group :test do
   gem 'capybara'
+  gem 'launchy'
 end
 
 group :test, :development do

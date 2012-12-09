@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20121204074854) do
   create_table "incomes", :force => true do |t|
     t.string   "description"
     t.integer  "amount_in_cents"
+    t.date     "date"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
