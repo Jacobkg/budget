@@ -10,7 +10,7 @@ class Category
   end
 
   def self.list
-    ["Food", "Rent", "Phone", "Gas", "Big Purchases", "Medical", "Necessities", "Entertainment"]
+    ["Food", "Rent", "Phone", "Gas", "Utilities", "Big Purchases", "Medical", "Necessities", "Entertainment", "Gift", "Clothes"]
   end
 
   def self.all
