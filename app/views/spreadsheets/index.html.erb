@@ -1,7 +1,8 @@
-<%= render "layouts/spreadsheet" %>
-
+<%= render "layouts/header" %>
+<%= render "layouts/income" %>
+<%= render "layouts/expenses" %>
+<br>
 <%= link_to "Add Expenses", new_expense_path %>
 <%= link_to "Add Income", new_income_path %>
 <br>
-
 <%= render "layouts/category_stats" %>

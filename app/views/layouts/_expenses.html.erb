@@ -1,0 +1,19 @@
+<h2>Expenses</h2>
+<table id='expenses'>
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Category</th>
+    <th>Account</th>
+  </tr>
+  <% Expense.this_month.each do |expense| %>
+    <tr>
+      <td><%= short_date(expense.date) %></td>
+      <td><%= expense.description %></td>
+      <td><%= expense.amount.format %></td>
+      <td><%= expense.category %></td>
+      <td><%= expense.account %></td>
+    </tr>
+  <% end %>
+</table>

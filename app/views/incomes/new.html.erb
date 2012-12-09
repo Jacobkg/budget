@@ -1,27 +1,6 @@
-<h1><%= current_month %></h1>
-
-<% Account.all.each do |account| %>
-<div id='<%= to_html_id(account.name) %>-balance'>
-  <%= account.name %> Balance: <%= account.balance.format %>
-</div>
-<% end %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/income' %>
 <br>
-
-<h2>Income</h2>
-<table id='income'>
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-  </tr>
-  <% Income.all.each do |income| %>
-    <tr>
-      <td><%= short_date(income.date) %></td>
-      <td><%= income.description %></td>
-      <td><%= income.amount.format %></td>
-    </tr>
-  <% end %>
-</table>
 
 <%= form_for(Income.new) do |f| %>
   <%= label_tag 'income[date_string]', "Date" %>

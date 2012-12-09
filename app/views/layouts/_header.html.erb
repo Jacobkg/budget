@@ -1,0 +1,7 @@
+<h1><%= current_month %></h1>
+
+<% Account.all.each do |account| %>
+<div id='<%= to_html_id(account.name) %>-balance'>
+  <%= account.name %> Balance: <%= account.balance.format %>
+</div>
+<% end %>

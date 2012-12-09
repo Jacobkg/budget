@@ -1,4 +1,5 @@
-<%= render "layouts/spreadsheet" %>
+<%= render 'layouts/header' %>
+<%= render "layouts/expenses" %>
 
 <%= form_for(Expense.new) do |f| %>
   <%= f.select :account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
