@@ -10,8 +10,8 @@ class Income < ActiveRecord::Base
   end
 
   def self.report(date, description, amount)
-    Account.by_name("Checking").add(amount)
     create_income(date, description, amount)
+    Account.by_name("Checking").add(amount)
   end
 
   private
@@ -22,7 +22,6 @@ class Income < ActiveRecord::Base
       income.description = description
       income.amount_in_cents = amount.cents
       income.save!
-      income
     end
 
 end

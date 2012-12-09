@@ -3,16 +3,16 @@ require 'spec_helper'
 describe Income do
 
   it "can filter line items by month" do
-    current = Income.report(Date.today, "One", Money.new(1))
-    old = Income.report(Date.today - 1.month, "Two", Money.new(1))
-    Income.this_month.should == [ current ]
+    Income.report(Date.today, "Current", Money.new(1))
+    Income.report(Date.today - 1.month, "Last", Money.new(1))
+    Income.this_month.map(&:description).should == [ "Current" ]
   end
 
   it "orders line items chronologically from oldest to newest" do
-    first = Income.report(Date.today.beginning_of_month, "One", Money.new(1))
-    last = Income.report(Date.today.beginning_of_month + 2.days, "Two", Money.new(1))
-    middle = Income.report(Date.today.beginning_of_month + 1.days, "Three", Money.new(1))
-    Income.this_month.should == [first, middle, last]
+    Income.report(Date.today.beginning_of_month, "First", Money.new(1))
+    Income.report(Date.today.beginning_of_month + 2.days, "Last", Money.new(1))
+    Income.report(Date.today.beginning_of_month + 1.days, "Middle", Money.new(1))
+    Income.this_month.map(&:description).should == ["First", "Middle", "Last"]
   end
 
   describe ".add_to_spreadsheet" do

@@ -14,8 +14,8 @@ class Expense < ActiveRecord::Base
   end
 
   def self.report(date, description, category, amount, account)
-    Account.by_name(account).subtract(amount)
     create_expense(date, description, category, amount, account)
+    Account.by_name(account).subtract(amount)
   end
 
   def self.sum_up(expense_association)
@@ -32,7 +32,6 @@ class Expense < ActiveRecord::Base
       expense.category = category
       expense.account = account
       expense.save!
-      expense
     end
 
 end
