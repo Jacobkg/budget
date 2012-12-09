@@ -9,6 +9,13 @@ class ExpensesController < ApplicationController
     redirect_to new_expense_url
   end
 
+  def destroy
+    expense = Expense.by_id(params[:id])
+    Account.by_name(expense.account).add(expense.amount)
+    expense.destroy
+    redirect_to(:back)
+  end
+
   private
 
     def date

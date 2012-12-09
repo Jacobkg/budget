@@ -70,4 +70,24 @@ feature "Adding Expenses" do
 
     page.find("#expenses").should have_content date.strftime("%m/%-d")
   end
+
+  scenario "Delete an expense" do
+    #Given an expense
+    click_link "Add Expenses"
+    fill_in "Description", :with => "Shopping at the mall"
+    fill_in "Amount", :with => "$25.00"
+    click_button "Save"
+
+    #And a negative credit card balance
+    page.find("#credit-card-balance").should have_content "$-25.00"
+
+    #When I click delete
+    click_on "X"
+
+    #Then it should disappear
+    page.should_not have_content "Shopping at the mall"
+
+    #And the account balance should be updated
+    page.find("#credit-card-balance").should have_content "$0.00"
+  end
 end

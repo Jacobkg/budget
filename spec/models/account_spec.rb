@@ -25,4 +25,9 @@ describe Account do
     Account.by_name("Credit Card").balance.should == Money.new(-150)
   end
 
+  it "can retrieve by id" do
+    account = Account.by_name("Credit Card")
+    Account.by_id(account.id).should == account
+  end
+
 end

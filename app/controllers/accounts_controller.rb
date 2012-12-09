@@ -3,11 +3,11 @@ class AccountsController < ApplicationController
   end
 
   def edit
-    @account = Account.find(params[:id])
+    @account = Account.by_id(params[:id])
   end
 
   def update
-    account = Account.find(params[:id])
+    account = Account.by_id(params[:id])
     account.set_balance(Money.parse(params[:account][:balance]))
     redirect_to accounts_url
   end

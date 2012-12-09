@@ -9,6 +9,10 @@ class Expense < ActiveRecord::Base
     Money.new(amount_in_cents)
   end
 
+  def self.by_id(expense_id)
+    Expense.find(expense_id)
+  end
+
   def self.add_to_spreadsheet(date, description, category, amount, account)
     expense = Expense.new
     expense.description = description

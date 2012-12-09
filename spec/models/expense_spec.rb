@@ -24,4 +24,9 @@ describe Expense do
     Expense.this_month.should == [first, middle, last]
   end
 
+  it "can retrieve by id" do
+    expense = Expense.add_to_spreadsheet(Date.today - 1.days, "A long walk", "Food", Money.new(525), "Credit Card")
+    Expense.by_id(expense.id).should == expense
+  end
+
 end

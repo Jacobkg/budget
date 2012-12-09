@@ -5,6 +5,10 @@ class Account < ActiveRecord::Base
     Account.find_by_name!(account_name)
   end
 
+  def self.by_id(account_id)
+    Account.find(account_id)
+  end
+
   def balance
     Money.new(balance_in_cents)
   end
