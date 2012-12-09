@@ -3,3 +3,27 @@
     <%= account.name %> <%= account.balance.format %> <%= link_to "Edit", edit_account_path(account) %>
   </div>
 <% end %>
+
+<h2>Transfers</h2>
+<table>
+  <tr>
+    <th>Description</th>
+  </tr>
+  <% Transfer.all.each do |transfer| %>
+    <tr>
+      <td><%= transfer.description %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_for(Transfer.new) do |f| %>
+  <%= f.label :amount %>
+  <%= f.text_field :amount %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :source_account, "From" %>
+  <%= f.select :source_account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
+  <%= f.label :destination_account, "To" %>
+  <%= f.select :destination_account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
+  <%= f.submit "Transfer" %>
+<% end %>
