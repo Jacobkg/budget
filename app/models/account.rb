@@ -2,11 +2,19 @@ class Account < ActiveRecord::Base
   attr_accessible
 
   def self.by_name(account_name)
-    Account.find_by_name!(account_name)
+    if account_name == "Out"
+      OutsideAccount.new
+    else
+      Account.find_by_name!(account_name)
+    end
   end
 
   def self.by_id(account_id)
     Account.find(account_id)
+  end
+
+  def self.transferable
+    Account.all + [OutsideAccount.new]
   end
 
   def balance
@@ -24,6 +32,17 @@ class Account < ActiveRecord::Base
 
   def add(amount)
     set_balance(balance + amount)
+  end
+
+end
+
+class OutsideAccount
+
+  def name
+    "Out"
+  end
+
+  def add(amount)
   end
 
 end

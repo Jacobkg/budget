@@ -30,4 +30,24 @@ describe Account do
     Account.by_id(account.id).should == account
   end
 
+  describe ".transferable" do
+
+    it "Includes the account 'Out'" do
+      Account.transferable.map(&:name).should include("Out")
+    end
+
+  end
+
+  describe "Outside accounts" do
+
+    it "is returned when you search by name 'Out'" do
+      Account.by_name("Out").name.should == "Out"
+    end
+
+    it "does nothing when you call add" do
+      Account.by_name("Out").add(Money.new(100))
+    end
+
+  end
+
 end

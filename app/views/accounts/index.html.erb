@@ -1,3 +1,5 @@
+<br>
+<br>
 <% Account.all.each do |account| %>
   <div id="<%=to_html_id(account.name) %>">
     <%= account.name %> <%= account.balance.format %> <%= link_to "Edit", edit_account_path(account) %>
@@ -5,25 +7,35 @@
 <% end %>
 
 <h2>Transfers</h2>
-<table>
+<table id="transfers">
   <tr>
+    <th>Date</th>
     <th>Description</th>
+    <th>Amount</th>
+    <th>From</th>
+    <th>To</th>
   </tr>
   <% Transfer.all.each do |transfer| %>
     <tr>
+      <td><%= short_date(transfer.date) %> </td>
       <td><%= transfer.description %></td>
+      <td><%= transfer.amount.format %></td>
+      <td><%= transfer.source_account %></td>
+      <td><%= transfer.destination_account %></td>
     </tr>
   <% end %>
 </table>
-
+<br>
 <%= form_for(Transfer.new) do |f| %>
+  <%= label_tag 'transfer[date_string]', "Date" %>
+  <%= text_field_tag 'transfer[date_string]', short_date(Date.today), :autofocus => true %>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
   <%= f.label :description %>
   <%= f.text_field :description %>
   <%= f.label :source_account, "From" %>
-  <%= f.select :source_account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
+  <%= f.select :source_account, options_for_select(Account.transferable.map {|n| [n.name, n.name] }, "Checking") %>
   <%= f.label :destination_account, "To" %>
-  <%= f.select :destination_account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
+  <%= f.select :destination_account, options_for_select(Account.transferable.map {|n| [n.name, n.name] }, "Credit Card") %>
   <%= f.submit "Transfer" %>
 <% end %>
