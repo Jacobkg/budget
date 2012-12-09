@@ -3,9 +3,9 @@ require "spec_helper"
 feature "Spreadsheet Stats" do
 
   scenario "Show totals for each category" do
-    Expense.add_to_spreadsheet(Date.today, "One", "Food", Money.new(125), "Credit Card")
-    Expense.add_to_spreadsheet(Date.today, "Two", "Rent", Money.new(120000), "Checking" )
-    Expense.add_to_spreadsheet(Date.today, "Three", "Food", Money.new(150), "Credit Card")
+    Expense.report(Date.today, "One", "Food", Money.new(125), "Credit Card")
+    Expense.report(Date.today, "Two", "Rent", Money.new(120000), "Checking" )
+    Expense.report(Date.today, "Three", "Food", Money.new(150), "Credit Card")
 
     visit "/"
     within("#category-stats") do

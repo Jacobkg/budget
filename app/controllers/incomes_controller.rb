@@ -3,8 +3,7 @@ class IncomesController < ApplicationController
   end
 
   def create
-    Income.add_to_spreadsheet(date, description, amount)
-    Account.by_name("Checking").add(amount)
+    Income.report(date, description, amount)
     redirect_to new_income_url
   end
 

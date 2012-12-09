@@ -4,9 +4,9 @@ feature "Spreadsheet Display" do
 
   scenario "Shows the expenses for the current month in order" do
     #Given some expenses from this month and last month
-    Expense.add_to_spreadsheet(Date.today.beginning_of_month + 15.days, "Bagels", "Food", Money.new(125), "Credit Card")
-    Expense.add_to_spreadsheet(Date.today.beginning_of_month, "ITunes", "Entertainment", Money.new(99), "Checking" )
-    Expense.add_to_spreadsheet(Date.today.beginning_of_month - 1.day, "Last month's rent", "Rent", Money.new(100000), "Credit Card")
+    Expense.report(Date.today.beginning_of_month + 15.days, "Bagels", "Food", Money.new(125), "Credit Card")
+    Expense.report(Date.today.beginning_of_month, "ITunes", "Entertainment", Money.new(99), "Checking" )
+    Expense.report(Date.today.beginning_of_month - 1.day, "Last month's rent", "Rent", Money.new(100000), "Credit Card")
 
     #When I visit the home page
     visit "/"
@@ -32,9 +32,9 @@ feature "Spreadsheet Display" do
 
   scenario "Shows the income for the current month in order" do
     #Given some income from this month and last month
-    Income.add_to_spreadsheet(Date.today.beginning_of_month + 28.days, "Bonus", Money.new(50000))
-    Income.add_to_spreadsheet(Date.today.beginning_of_month - 1.day, "Last Month Salary", Money.new(200000))
-    Income.add_to_spreadsheet(Date.today.beginning_of_month + 15.days, "This Month Salary", Money.new(200000))
+    Income.report(Date.today.beginning_of_month + 28.days, "Bonus", Money.new(50000))
+    Income.report(Date.today.beginning_of_month - 1.day, "Last Month Salary", Money.new(200000))
+    Income.report(Date.today.beginning_of_month + 15.days, "This Month Salary", Money.new(200000))
 
     #When I visit the home page
     visit "/"

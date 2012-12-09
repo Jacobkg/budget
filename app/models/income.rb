@@ -9,13 +9,20 @@ class Income < ActiveRecord::Base
     Money.new(amount_in_cents)
   end
 
-  def self.add_to_spreadsheet(date, description, amount)
-    income = Income.new
-    income.date = date
-    income.description = description
-    income.amount_in_cents = amount.cents
-    income.save!
-    income
+  def self.report(date, description, amount)
+    Account.by_name("Checking").add(amount)
+    create_income(date, description, amount)
   end
+
+  private
+
+    def self.create_income(date, description, amount)
+      income = Income.new
+      income.date = date
+      income.description = description
+      income.amount_in_cents = amount.cents
+      income.save!
+      income
+    end
 
 end

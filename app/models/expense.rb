@@ -13,19 +13,26 @@ class Expense < ActiveRecord::Base
     Expense.find(expense_id)
   end
 
-  def self.add_to_spreadsheet(date, description, category, amount, account)
-    expense = Expense.new
-    expense.description = description
-    expense.amount_in_cents = amount.cents
-    expense.date = date
-    expense.category = category
-    expense.account = account
-    expense.save!
-    expense
+  def self.report(date, description, category, amount, account)
+    Account.by_name(account).subtract(amount)
+    create_expense(date, description, category, amount, account)
   end
 
   def self.sum_up(expense_association)
     expense_association.inject(Money.new(0)) {|sum, x| sum + x.amount}
   end
+
+  private
+
+    def self.create_expense(date, description, category, amount, account)
+      expense = Expense.new
+      expense.description = description
+      expense.amount_in_cents = amount.cents
+      expense.date = date
+      expense.category = category
+      expense.account = account
+      expense.save!
+      expense
+    end
 
 end

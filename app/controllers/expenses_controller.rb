@@ -4,8 +4,7 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    Expense.add_to_spreadsheet(date, description, category, amount, account_name)
-    Account.by_name(account_name).subtract(amount)
+    Expense.report(date, description, category, amount, account_name)
     redirect_to new_expense_url
   end
 
