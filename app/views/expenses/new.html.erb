@@ -9,7 +9,7 @@
   <%= f.text_field :description%>
   <%= f.label :amount %>
   <%= f.text_field :amount %>
-  <%= f.select :category, options_for_select(Category.list.map {|n| [n,n]}) %>
+  <%= f.select :category, options_for_select(BudgetItem.all.map {|n| [n.category, n.category]}) %>
   <%= f.submit "Save" %>
 <% end %>
 <br>

@@ -4,10 +4,10 @@
     <th>Category</th>
     <th>Spent</th>
   </tr>
-  <% Category.all.each do |category| %>
+  <% BudgetItem.all.each do |budget_item| %>
     <tr>
-      <td> <%= category.name %> </td>
-      <td> <%= category.this_month_total.format %> </td>
+      <td> <%= budget_item.category %> </td>
+      <td> <%= budget_item.used_this_month.format %> </td>
     </tr>
   <% end %>
 </table>

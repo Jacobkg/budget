@@ -2,6 +2,14 @@ class BudgetItemsController < ApplicationController
   def index
   end
 
+  def new
+  end
+
+  def create
+    BudgetItem.add_to_budget(params[:budget_item][:category])
+    redirect_to budget_items_url
+  end
+
   def edit
     @budget_item = BudgetItem.find(params[:id])
   end

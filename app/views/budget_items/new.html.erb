@@ -1,0 +1,7 @@
+<%= render "budget" %>
+<br>
+<%= form_for(BudgetItem.new) do |f| %>
+  <%= f.label :category %>
+  <%= f.text_field :category, :autofocus => true %>
+  <%= f.submit "Save" %>
+<% end %>

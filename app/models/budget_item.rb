@@ -16,4 +16,8 @@ class BudgetItem < ActiveRecord::Base
     self.save!
   end
 
+  def used_this_month
+    Expense.sum_up(Expense.this_month.where(:category => category))
+  end
+
 end
