@@ -24,7 +24,6 @@ feature "Budget" do
     fill_in "Category", :with => "FooBar"
     click_button "Save"
 
-    visit "/"
     page.should have_content "FooBar $0.00"
   end
 

@@ -1,6 +1,10 @@
 class BudgetItem < ActiveRecord::Base
   attr_accessible
 
+  def self.by_category(category)
+    find_by_category!(category)
+  end
+
   def self.add_to_budget(category)
     budget_item = BudgetItem.new
     budget_item.category = category

@@ -3,11 +3,15 @@
   <tr>
     <th>Category</th>
     <th>Spent</th>
+    <th>Budget</th>
+    <th>Remaining</th>
   </tr>
   <% BudgetItem.all.each do |budget_item| %>
     <tr>
       <td> <%= budget_item.category %> </td>
       <td> <%= budget_item.used_this_month.format %> </td>
+      <td> <%= budget_item.amount.format %> </td>
+      <td> <%= (budget_item.amount - budget_item.used_this_month).format %> </td>
     </tr>
   <% end %>
 </table>
