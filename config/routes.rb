@@ -8,6 +8,7 @@ Budget::Application.routes.draw do
   resources :incomes
   resources :accounts
   resources :transfers
+  resources :budget_items
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

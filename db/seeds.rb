@@ -14,3 +14,7 @@ checking = Account.new
 checking.name = "Checking"
 checking.balance_in_cents = 100000
 checking.save!
+
+Category.all.each do |category|
+  BudgetItem.add_to_budget(category.name)
+end
