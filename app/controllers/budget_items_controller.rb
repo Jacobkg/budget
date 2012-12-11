@@ -6,7 +6,7 @@ class BudgetItemsController < ApplicationController
   end
 
   def create
-    BudgetItem.add_to_budget(params[:budget_item][:category])
+    BudgetItem.add_to_budget(params[:budget_item][:category], params[:budget_item][:period])
     redirect_to budget_items_url
   end
 

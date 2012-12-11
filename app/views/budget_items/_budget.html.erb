@@ -1,26 +1,7 @@
 <h1>Budget</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Amount</th>
-    <th></th>
-  </tr>
-  <% BudgetItem.all.each do |budget_item| %>
-    <tr id='<%= to_html_id(budget_item.category) %>'>
-      <td><%=budget_item.category %></td>
-      <% if budget_item == @budget_item %>
-          <td>
-            <%= form_for(@budget_item) do |f| %>
-              <%= f.text_field :amount, :autofocus => true %>
-              <%= f.submit "Save" %>
-            <% end %>
-          </td>
-          <td></td>
-      <% else %>
-          <td><%= budget_item.amount.format %></td>
-          <td><%= link_to "Edit", edit_budget_item_path(budget_item) %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+<h2>Monthly</h2>
+<%= render "items_list", :table_id => "monthly", :items_collection => BudgetItem.monthly %>
+
+<h2>Yearly</h2>
+<%= render "items_list", :table_id => "yearly", :items_collection => BudgetItem.yearly %>

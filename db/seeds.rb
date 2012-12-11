@@ -15,6 +15,10 @@ checking.name = "Checking"
 checking.balance_in_cents = 100000
 checking.save!
 
-["Food", "Rent", "Phone", "Gas", "Utilities", "Big Purchases", "Medical", "Necessities", "Entertainment", "Gift", "Clothes"].each do |category|
-  BudgetItem.add_to_budget(category)
+[ "Food", "Rent", "Phone", "Gas", "Utilities", "Necessities", "Entertainment" ].each do |category|
+  BudgetItem.add_to_budget(category, "Monthly")
+end
+
+[ "Big Purchases", "Medical", "Gifts", "Clothes" ].each do |category|
+  BudgetItem.add_to_budget(category, "Yearly")
 end

@@ -1,13 +1,17 @@
 class BudgetItem < ActiveRecord::Base
   attr_accessible
 
+  scope :monthly, where(:period => "Monthly")
+  scope :yearly, where(:period => "Yearly")
+
   def self.by_category(category)
     find_by_category!(category)
   end
 
-  def self.add_to_budget(category)
+  def self.add_to_budget(category, period)
     budget_item = BudgetItem.new
     budget_item.category = category
+    budget_item.period = period
     budget_item.save!
   end
 

@@ -3,5 +3,6 @@
 <%= form_for(BudgetItem.new) do |f| %>
   <%= f.label :category %>
   <%= f.text_field :category, :autofocus => true %>
+  <%= f.select :period, options_for_select([["Monthly", "Monthly"], ["Yearly", "Yearly"]]) %>
   <%= f.submit "Save" %>
 <% end %>

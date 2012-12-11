@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20121210052652) do
   create_table "budget_items", :force => true do |t|
     t.string   "category"
     t.integer  "amount_in_cents"
+    t.string   "period"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
