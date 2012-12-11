@@ -1,0 +1,7 @@
+<br>
+<br>
+<% Account.all.each do |account| %>
+  <div id="<%=to_html_id(account.name) %>">
+    <%= account.name %> <%= account.balance.format %> <%= link_to "Edit", edit_account_path(account) %>
+  </div>
+<% end %>

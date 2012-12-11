@@ -30,6 +30,12 @@ describe Account do
     Account.by_id(account.id).should == account
   end
 
+  it "can add an account" do
+    Account.add_account("Amex")
+    Account.last.name.should == "Amex"
+    Account.last.balance.should == Money.new(0)
+  end
+
   describe ".transferable" do
 
     it "Includes the account 'Out'" do

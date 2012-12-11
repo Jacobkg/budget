@@ -1,6 +1,6 @@
 <%= render 'layouts/header' %>
 <%= render "layouts/expenses" %>
-
+<br>
 <%= form_for(Expense.new) do |f| %>
   <%= f.select :account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
   <%= label_tag 'expense[date_string]', "Date" %>

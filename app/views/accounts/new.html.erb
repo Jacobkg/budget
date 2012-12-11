@@ -1,0 +1,7 @@
+<%= render "account_list" %>
+<br>
+<%= form_for(Account.new) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Save" %>
+<% end %>

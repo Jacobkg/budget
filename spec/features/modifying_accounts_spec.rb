@@ -71,4 +71,14 @@ feature "Modifying Accounts" do
 
   end
 
+  scenario "Create a new account" do
+    visit accounts_path
+    click_link "New Account"
+
+    fill_in "Name", :with => "Amex"
+    click_button "Save"
+
+    page.should have_content "Amex $0.00"
+  end
+
 end

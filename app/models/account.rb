@@ -1,6 +1,13 @@
 class Account < ActiveRecord::Base
   attr_accessible
 
+  def self.add_account(name)
+    account = Account.new
+    account.name = name
+    account.balance_in_cents = 0
+    account.save!
+  end
+
   def self.by_name(account_name)
     if account_name == "Out"
       OutsideAccount.new
