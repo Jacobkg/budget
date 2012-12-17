@@ -54,6 +54,10 @@ describe Account do
       Account.by_name("Out").add(Money.new(100))
     end
 
+    it "does nothing when you call subtract" do
+      Account.by_name("Out").subtract(Money.new(100))
+    end
+
   end
 
 end

@@ -22,6 +22,11 @@ class Expense < ActiveRecord::Base
     expense_association.inject(Money.new(0)) {|sum, x| sum + x.amount}
   end
 
+  def self.default_date
+    return Date.today if Expense.count == 0
+    Expense.order("created_at desc").first.date
+  end
+
   private
 
     def self.create_expense(date, description, category, amount, account)

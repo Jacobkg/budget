@@ -39,4 +39,17 @@ describe Expense do
 
   end
 
+  describe ".default_date" do
+
+    it "is the current date if no expenses exist" do
+      Expense.default_date.should == Date.today
+    end
+
+    it "is the date of the most recently created expense" do
+      Expense.report(Date.today, "First", "Food", Money.new(1), "Credit Card")
+      Expense.report(Date.today - 2.days, "Second", "Food", Money.new(1), "Credit Card")
+      Expense.default_date.should == Date.today - 2.days
+    end
+  end
+
 end

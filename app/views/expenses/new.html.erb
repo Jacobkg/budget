@@ -4,7 +4,7 @@
 <%= form_for(Expense.new) do |f| %>
   <%= f.select :account, options_for_select(Account.all.map {|n| [n.name, n.name] }) %>
   <%= label_tag 'expense[date_string]', "Date" %>
-  <%= text_field_tag 'expense[date_string]', short_date(Expense.last.date), :autofocus => true %>
+  <%= text_field_tag 'expense[date_string]', short_date(Expense.default_date), :autofocus => true %>
   <%= f.label :description %>
   <%= f.text_field :description%>
   <%= f.label :amount %>

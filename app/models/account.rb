@@ -52,4 +52,7 @@ class OutsideAccount
   def add(amount)
   end
 
+  def subtract(amount)
+  end
+
 end
