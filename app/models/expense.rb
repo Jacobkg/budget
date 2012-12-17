@@ -1,7 +1,7 @@
 class Expense < ActiveRecord::Base
   attr_accessible
 
-  default_scope order("date ASC")
+  default_scope order("date DESC")
 
   scope :this_month, where(["date >= ?", Date.today.beginning_of_month])
 
@@ -24,7 +24,7 @@ class Expense < ActiveRecord::Base
 
   def self.default_date
     return Date.today if Expense.count == 0
-    Expense.order("created_at desc").first.date
+    Expense.order(:created_at).last.date
   end
 
   private

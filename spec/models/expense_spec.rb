@@ -8,9 +8,9 @@ describe Expense do
     Expense.this_month.map(&:description).should == [ "Current" ]
   end
 
-  it "orders line items chronologically from oldest to newest" do
-    Expense.report(Date.today.beginning_of_month, "First", "Food", Money.new(1), "Credit Card")
-    Expense.report(Date.today.beginning_of_month + 2.days, "Last", "Food", Money.new(1), "Credit Card")
+  it "orders line items chronologically from newest to oldest" do
+    Expense.report(Date.today.beginning_of_month, "Last", "Food", Money.new(1), "Credit Card")
+    Expense.report(Date.today.beginning_of_month + 2.days, "First", "Food", Money.new(1), "Credit Card")
     Expense.report(Date.today.beginning_of_month + 1.days, "Middle", "Food", Money.new(1), "Credit Card")
     Expense.this_month.map(&:description).should == ["First", "Middle", "Last"]
   end

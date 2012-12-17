@@ -26,8 +26,8 @@ feature "Spreadsheet Display" do
 
     page.should_not have_content "Last month's rent"
 
-    #And they should be in chronological order
-    page.body.should match /.*ITunes.*Bagels.*/m
+    #And they should be in descending chronological order
+    page.body.should match /.*Bagels.*ITunes.*/m
   end
 
   scenario "Shows the income for the current month in order" do
