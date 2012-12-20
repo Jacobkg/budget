@@ -1,9 +1,9 @@
 class Expense < ActiveRecord::Base
   attr_accessible
 
-  default_scope order("date DESC")
+  #default_scope order("date DESC")
 
-  scope :this_month, where(["date >= ?", Date.today.beginning_of_month])
+  scope :this_month, where(["date >= ?", Date.today.beginning_of_month]).order("date DESC")
 
   def amount
     Money.new(amount_in_cents)
